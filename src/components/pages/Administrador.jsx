@@ -1,6 +1,7 @@
 import React from "react";
 import { Table, Button, Image } from "react-bootstrap";
 import fotoCafe from "../../assets/fotoCafe.jpg";
+import { Link } from "react-router-dom";
 const Administrador = () => {
   return (
     <div className="maquetadosPaginas">
@@ -9,9 +10,9 @@ const Administrador = () => {
           <h2 className="display-2 d-inline">Productos disponibles</h2>
           <div className="align-self-center">
 
-          <Button variant="primary" >
+          <Link className="btn btn-primary" to={'/administrador/crear'} >
           <i className="bi bi-file-earmark-plus"></i>
-          </Button>
+          </Link>
           </div>
         </div>
         <Table striped bordered hover>
