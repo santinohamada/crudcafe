@@ -1,5 +1,6 @@
 import React from 'react';
 import error from '../../assets/error-404.jpg'
+import { Link } from 'react-router-dom';
 const Error404 = () => {
     return (
         <div className='maquetadosPaginas'>
@@ -9,7 +10,7 @@ const Error404 = () => {
             </div>
             <div className='text-center'>
 
-            <a href="#" className='btn btn-primary'>Volver al inicio</a>
+            <Link to="/" className='btn btn-success'>Volver al inicio</Link>
             </div>
         </div>
     );
