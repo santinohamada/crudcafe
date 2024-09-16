@@ -4,6 +4,7 @@ import fotoCafe from "../../assets/fotoCafe.jpg";
 import { Link } from "react-router-dom";
 import { leerProductosAPI } from "../../helpers/queries";
 import Swal from "sweetalert2";
+import ItemProducto from "./producto/ItemProducto";
 const Administrador = () => {
 
 const [listaProductos,setListaProductos]=useState([])
@@ -51,74 +52,9 @@ const obtenerProductos = async ()=>{
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Café americano</td>
-              <td>$250</td>
-              <td>
-                <Image src={fotoCafe} thumbnail width="150" />
-              </td>
-              <td>Bebida caliente</td>
-              <td>
-                <Button variant="warning" className="me-2">
-                  <i className="bi bi-pencil-square"></i>
-                </Button>
-                <Button variant="danger">
-                  <i className="bi bi-trash"></i>
-                </Button>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Café americano</td>
-              <td>$250</td>
-              <td>
-                <Image src={fotoCafe} thumbnail width="150" />
-              </td>
-              <td>Bebida caliente</td>
-              <td>
-                <Button variant="warning" className="me-2">
-                  <i className="bi bi-pencil-square"></i>
-                </Button>
-                <Button variant="danger">
-                  <i className="bi bi-trash"></i>
-                </Button>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Café americano</td>
-              <td>$250</td>
-              <td>
-                <Image src={fotoCafe} thumbnail width="150" />
-              </td>
-              <td>Bebida caliente</td>
-              <td>
-                <Button variant="warning" className="me-2">
-                  <i className="bi bi-pencil-square"></i>
-                </Button>
-                <Button variant="danger">
-                  <i className="bi bi-trash"></i>
-                </Button>
-              </td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Café americano</td>
-              <td>$250</td>
-              <td>
-                <Image src={fotoCafe} thumbnail width="150" />
-              </td>
-              <td>Bebida caliente</td>
-              <td>
-                <Button variant="warning" className="me-2">
-                  <i className="bi bi-pencil-square"></i>
-                </Button>
-                <Button variant="danger">
-                  <i className="bi bi-trash"></i>
-                </Button>
-              </td>
-            </tr>
+            {
+              listaProductos.map((producto,posicion)=><ItemProducto key={producto.id} producto={producto} fila={posicion+1} ></ItemProducto>)
+            }
           </tbody>
         </Table>
       </div>
