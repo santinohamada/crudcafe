@@ -1,7 +1,47 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import Swal from 'sweetalert2';
+import { borrarProductoAPI, leerProductosAPI } from '../../../helpers/queries';
+const ItemProducto = ({producto,fila,setListaProductos}) => {
+    
+const borrarProducto=()=>{
+    Swal.fire({
+        title: "Estas seguro de borrar el producto?",
+        text: "No puedes revertir esta operacion",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Borrar!",
+        cancelButtonText: "cancelar"
+      }).then(async(result) => {
+        if (result.isConfirmed) {
 
-const ItemProducto = ({producto,fila}) => {
+const respuesta = await borrarProductoAPI(producto.id)
+if(respuesta.status ===200){
+
+    Swal.fire({
+      title: "Producto eliminado",
+      text: `El producto ${producto.nombreProducto} fue eliminado.`,
+      icon: "success"
+    });
+    const productoAPI = await leerProductosAPI()
+    if(productoAPI ===200){
+        const prodActualizados =  await productoAPI.json()
+        setListaProductos(prodActualizados)
+    }
+}
+else{
+    Swal.fire({
+        title: "Ocurrio un error",
+        text: `El producto ${producto.nombreProducto} no pudo ser eliminado, intente esta operacion luego `,
+        icon: "error",
+      });
+}
+        }
+      });
+}
+
     return (
             <tr>
               <td> {fila} </td>
@@ -15,7 +55,7 @@ const ItemProducto = ({producto,fila}) => {
                 <Button variant="warning" className="me-2">
                   <i className="bi bi-pencil-square"></i>
                 </Button>
-                <Button variant="danger">
+                <Button variant="danger" onClick={borrarProducto}>
                   <i className="bi bi-trash"></i>
                 </Button>
               </td>
