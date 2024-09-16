@@ -1,8 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Table, Button, Image } from "react-bootstrap";
 import fotoCafe from "../../assets/fotoCafe.jpg";
 import { Link } from "react-router-dom";
+import { leerProductosAPI } from "../../helpers/queries";
+import Swal from "sweetalert2";
 const Administrador = () => {
+
+const [listaProductos,setListaProductos]=useState([])
+
+useEffect(()=>{
+obtenerProductos();
+},[])
+
+const obtenerProductos = async ()=>{
+  const respuesta = await leerProductosAPI();
+  console.log(respuesta)
+  if(respuesta.status ===200){
+    const datos = await respuesta.json()
+    setListaProductos(datos)
+  }
+  else{
+    Swal.fire({
+      title: "Ocurrio un error",
+      text: `En este momento no podemos mostrar los productos, intente en breve..`,
+      icon: "error",
+    });
+  }
+}
   return (
     <div className="maquetadosPaginas">
       <div className="container">
