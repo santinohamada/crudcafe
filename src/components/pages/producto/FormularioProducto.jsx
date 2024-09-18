@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { buscaProductosAPI, crearProductoAPI } from "../../../helpers/queries";
+import { buscaProductosAPI, crearProductoAPI, editarProductoAPI } from "../../../helpers/queries";
 import Swal from "sweetalert2";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 const FormularioProducto = ({ titulo, creandoProducto }) => {
   const {
     register,
@@ -13,7 +13,7 @@ const FormularioProducto = ({ titulo, creandoProducto }) => {
     setValue
   } = useForm();
 
-
+const navegacion = useNavigate()
 
 const {id} = useParams()
 
@@ -38,6 +38,11 @@ const cargarProducto =async ()=>{
   }
   else{
     //cargar en la respuesta del formulario
+    Swal.fire({
+      title: "Ocurrio un error",
+      text: `No se pudo crear el producto, intente esta operacion en unos minutos `,
+      icon: "error",
+    });
   }
   //cargar en la respuesta del formulario
 }
@@ -62,8 +67,27 @@ const cargarProducto =async ()=>{
       }
     } else {
       console.log("editando prod");
+
+      //enviar el prod a la API
+const respuesta = await editarProductoAPI(producto,id)
+if(respuesta.status===200){
+  Swal.fire({
+    title: "Producto editado",
+    text: `El producto ${producto.nombreProducto} fue editado correctamente `,
+    icon: "success",
+  });
+  //redireccionar al admin
+  navegacion('/administrador')
+}
+else{
+  Swal.fire({
+    title: "ERROR",
+    text: `El producto no se pudo editar `,
+    icon: "error",
+  });
+}
+
     }
-    console.log(producto);
   };
   return (
     <div className="maquetadosPaginas">

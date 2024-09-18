@@ -47,7 +47,7 @@ else{
             <tr>
               <td> {fila} </td>
               <td>{producto.nombreProducto} </td>
-              <td>{producto.precio} </td>
+              <td> ${producto.precio} </td>
               <td>
                 <img src={producto.imagen} alt={"Imagen de " + producto.nombreProducto} className='w-100' />
               </td>
