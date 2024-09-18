@@ -3,7 +3,7 @@ import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { crearProductoAPI } from "../../../helpers/queries";
 import Swal from "sweetalert2";
-const FormularioProducto = () => {
+const FormularioProducto = ({ titulo, creandoProducto }) => {
   const {
     register,
     handleSubmit,
@@ -12,31 +12,35 @@ const FormularioProducto = () => {
   } = useForm();
 
   const onSubmit = async (producto) => {
-    console.log(producto);
-    const respuesta = await crearProductoAPI(producto);
-    if (respuesta.status === 201) {
-      console.log("Se creo el producto");
-      reset();
-      Swal.fire({
-        title: "Producto creado",
-        text: `No se pudo crear el producto ${producto.nombreProducto}, fue creado correctamente `,
-        icon: "success",
-      });
+    if (creandoProducto) {
+      const respuesta = await crearProductoAPI(producto);
+      if (respuesta.status === 201) {
+        console.log("Se creo el producto");
+        reset();
+        Swal.fire({
+          title: "Producto creado",
+          text: `se pudo crear el producto ${producto.nombreProducto}, fue creado correctamente `,
+          icon: "success",
+        });
+      } else {
+        //mostrar un cartel de error al usuario
+        Swal.fire({
+          title: "Ocurrio un error",
+          text: `No se pudo crear el producto ${producto.nombreProducto}, intente esta operacion en unos minutos `,
+          icon: "error",
+        });
+      }
     } else {
-      //mostrar un cartel de error al usuario
-      Swal.fire({
-        title: "Ocurrio un error",
-        text: `No se pudo crear el producto ${producto.nombreProducto}, intente esta operacion en unos minutos `,
-        icon: "error",
-      });
+      console.log("editando prod");
     }
+    console.log(producto);
   };
   return (
     <div className="maquetadosPaginas">
       <Container>
         <Row className="justify-content-md-center">
           <Col>
-            <h1 className=" display-3 p-1 border-bottom">Nuevo producto</h1>
+            <h1 className=" display-3 p-1 border-bottom">{titulo}</h1>
             <Form onSubmit={handleSubmit(onSubmit)}>
               <Form.Group controlId="formProducto">
                 <Form.Label>Producto*</Form.Label>

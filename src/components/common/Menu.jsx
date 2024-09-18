@@ -19,7 +19,7 @@ const Menu = () => {
           <Nav>
             <NavLink end className={'nav-link'} to={'/'}>Inicio</NavLink>
             <NavLink className={'nav-link'} to={'/administrador'}>Administrador</NavLink>
-            <NavLink className={'nav-link'} to={'/login'}>Iniciar Sesion</NavLink>
+            <NavLink className={'nav-link'} to={'/IniciarSesion'}>Iniciar Sesion</NavLink>
           </Nav>
         </Navbar.Collapse>
       </Container>
