@@ -53,7 +53,7 @@ else{
               </td>
               <td>{producto.categoria}</td>
               <td>
-                <Link  className="btn btn-warning me-2" to={'./editar'}>
+                <Link  className="btn btn-warning me-2" to={`/administrador/editar/${producto.id}`}>
                   <i className="bi bi-pencil-square"></i>
 
                   

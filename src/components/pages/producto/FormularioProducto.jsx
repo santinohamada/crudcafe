@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { crearProductoAPI } from "../../../helpers/queries";
 import Swal from "sweetalert2";
+import { useParams } from "react-router-dom";
 const FormularioProducto = ({ titulo, creandoProducto }) => {
   const {
     register,
@@ -11,6 +12,18 @@ const FormularioProducto = ({ titulo, creandoProducto }) => {
     reset,
   } = useForm();
 
+const {id} = useParams()
+
+useEffect(()=>{
+  if(!creandoProducto){
+    cargarProducto();
+  }
+},[])
+const cargarProducto = ()=>{
+  //buscar prod en la API
+
+  //cargar en la respuesta del formulario
+}
   const onSubmit = async (producto) => {
     if (creandoProducto) {
       const respuesta = await crearProductoAPI(producto);
