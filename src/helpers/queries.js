@@ -11,6 +11,15 @@ export const leerProductosAPI = async()=>{
 return false
     }
 }
+export const buscaProductosAPI = async(id)=>{
+    try{
+        const respuesta = await fetch(URLProducto+`/`+id)
+        return respuesta
+    }
+    catch(error){
+return false
+    }
+}
 
 //POST
 

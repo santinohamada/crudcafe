@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { crearProductoAPI } from "../../../helpers/queries";
+import { buscaProductosAPI, crearProductoAPI } from "../../../helpers/queries";
 import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
 const FormularioProducto = ({ titulo, creandoProducto }) => {
@@ -10,7 +10,10 @@ const FormularioProducto = ({ titulo, creandoProducto }) => {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue
   } = useForm();
+
+
 
 const {id} = useParams()
 
@@ -19,9 +22,23 @@ useEffect(()=>{
     cargarProducto();
   }
 },[])
-const cargarProducto = ()=>{
+const cargarProducto =async ()=>{
   //buscar prod en la API
+  const respuesta = await buscaProductosAPI(id)
+  if(respuesta.status===200){
+    const productoEncontrado = await respuesta.json()
+    //cargar datos en lo form
 
+    setValue('precio',productoEncontrado.precio)
+    setValue('nombreProducto',productoEncontrado.nombreProducto)
+    setValue('imagen',productoEncontrado.imagen)
+    setValue('categoria',productoEncontrado.categoria)
+    setValue('descripcion_breve',productoEncontrado.descripcion_breve)
+    setValue('descripcion_amplia',productoEncontrado.descripcion_amplia)
+  }
+  else{
+    //cargar en la respuesta del formulario
+  }
   //cargar en la respuesta del formulario
 }
   const onSubmit = async (producto) => {
