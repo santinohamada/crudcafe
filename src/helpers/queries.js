@@ -2,24 +2,22 @@ const URLProducto = import.meta.env.VITE_API_PRODUCTO;
 //Peticiones o solicitudes
 
 //GET
-export const leerProductosAPI = async()=>{
-    try{
-        const respuesta = await fetch(URLProducto)
-        return respuesta
-    }
-    catch(error){
-return false
-    }
-}
-export const buscaProductosAPI = async(id)=>{
-    try{
-        const respuesta = await fetch(URLProducto+`/`+id)
-        return respuesta
-    }
-    catch(error){
-return false
-    }
-}
+export const leerProductosAPI = async () => {
+  try {
+    const respuesta = await fetch(URLProducto);
+    return respuesta;
+  } catch (error) {
+    return false;
+  }
+};
+export const buscaProductosAPI = async (id) => {
+  try {
+    const respuesta = await fetch(URLProducto + `/` + id);
+    return respuesta;
+  } catch (error) {
+    return false;
+  }
+};
 
 //POST
 
@@ -40,9 +38,9 @@ export const crearProductoAPI = async (productoNuevo) => {
   }
 };
 //PUT o PATH
-export const editarProductoAPI = async (productoEditado,id) => {
+export const editarProductoAPI = async (productoEditado, id) => {
   try {
-    const respuesta = await fetch(URLProducto+'/'+id, {
+    const respuesta = await fetch(URLProducto + "/" + id, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -57,14 +55,30 @@ export const editarProductoAPI = async (productoEditado,id) => {
 };
 //DELETE
 export const borrarProductoAPI = async (id) => {
-    try {
-      const respuesta = await fetch(URLProducto+'/'+id, {
-        method: "DELETE"
-      });
-      console.log(respuesta);
-      return respuesta;
-    } catch (error) {
-      console.error(error);
-      return false;
-    }
-  };
+  try {
+    const respuesta = await fetch(URLProducto + "/" + id, {
+      method: "DELETE",
+    });
+    console.log(respuesta);
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+const userAdmin = {
+  email: "admin@admin.com",
+  password: "1234",
+};
+
+export const login = (usuario) => {
+  if (
+    usuario.email === userAdmin.email &&
+    usuario.password === userAdmin.password
+  ) {
+    sessionStorage.setItem('userKey',JSON.stringify(userAdmin.email))
+  return true
+  }
+  return false
+};

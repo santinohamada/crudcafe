@@ -2,8 +2,15 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Logo from "../../assets/Logo.png";
-import { Link, NavLink } from "react-router-dom";
-const Menu = () => {
+import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
+const Menu = ({usuarioLogueado,setUsuarioLogueado}) => {
+  const navigation = useNavigate()
+  const logout = ()=>{
+    sessionStorage.removeItem('userKey')
+    setUsuarioLogueado('')
+    navigation('/')
+  }
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container className="d-flex justify-content-between">
@@ -18,8 +25,14 @@ const Menu = () => {
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav>
             <NavLink end className={'nav-link'} to={'/'}>Inicio</NavLink>
-            <NavLink className={'nav-link'} to={'/administrador'}>Administrador</NavLink>
-            <NavLink className={'nav-link'} to={'/IniciarSesion'}>Iniciar Sesion</NavLink>
+            {usuarioLogueado !== ''?(
+              <>
+              <NavLink className={'nav-link'} to={'/administrador'}>Administrador</NavLink>
+              <Button className={'nav-link'} onClick={logout}> Logout</Button>
+              </>
+            )
+          :( <NavLink className={'nav-link'} to={'/IniciarSesion'}>Iniciar Sesion</NavLink>)}
+           
           </Nav>
         </Navbar.Collapse>
       </Container>
