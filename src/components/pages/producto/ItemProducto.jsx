@@ -49,7 +49,8 @@ else{
               <td>{producto.nombreProducto} </td>
               <td> ${producto.precio} </td>
               <td>
-                <img src={producto.imagen} alt={"Imagen de " + producto.nombreProducto} className='w-100' />
+                <img src={producto.imagen}  alt={"Imagen de " + producto.nombreProducto} style={{width:"150px",
+              }} />
               </td>
               <td>{producto.categoria}</td>
               <td>

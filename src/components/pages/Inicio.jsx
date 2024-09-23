@@ -1,109 +1,36 @@
-import React from "react";
-import fotoCafe from "../../assets/fotoCafe.jpg";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import { CardFooter } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { leerProductosAPI } from "../../helpers/queries";
+import CardProducto from "./producto/CardProducto";
 const Inicio = () => {
+  const [productos, setProductos] = useState([]);
+  useEffect(() => {
+    obtenerProductos()
+  }, []);
+
+  const obtenerProductos = async () => {
+    try {
+      const datos = await leerProductosAPI();
+      if(datos.status ===200){
+        const prod = await datos.json()
+        setProductos(prod)
+        
+      }
+    } catch(err) {
+      console.log(err)
+    }
+  };
+
   return (
+    
     <div className="maquetadosPaginas">
-        <div className="container">
-      <h2>Nuestros Productos</h2>
-      <div className="row">
-        <div className="my-2 col-3">
-          <Card>
-            <Card.Img variant="top" src={fotoCafe} />
-            <Card.Body>
-              <h5 className="verdeOscuro">Capuchino</h5>
-              <Card.Text>
-                Descripcion: Espuma de leche cremosa sobre un espresso fuerte.
-              </Card.Text>
-              <div className="p-0 m-0">
-                <b>Precio: $350</b>
-              </div>
-            </Card.Body>
-            <CardFooter>
-              <div className="text-end">
-                <a className="btn btn-success">Go somewhere</a>
-              </div>
-            </CardFooter>
-          </Card>
-        </div>
-        <div className="my-2 col-3">
-          <Card>
-            <Card.Img variant="top" src={fotoCafe} />
-            <Card.Body>
-              <h5 className="verdeOscuro">Capuchino</h5>
-              <Card.Text>
-                Descripcion: Espuma de leche cremosa sobre un espresso fuerte.
-              </Card.Text>
-              <div className="p-0 m-0">
-                <b>Precio: $350</b>
-              </div>
-            </Card.Body>
-            <CardFooter>
-              <div className="text-end">
-                <a className="btn btn-success">Go somewhere</a>
-              </div>
-            </CardFooter>
-          </Card>
-        </div>
-        <div className="my-2 col-3">
-          <Card>
-            <Card.Img variant="top" src={fotoCafe} />
-            <Card.Body>
-              <h5 className="verdeOscuro">Capuchino</h5>
-              <Card.Text>
-                Descripcion: Espuma de leche cremosa sobre un espresso fuerte.
-              </Card.Text>
-              <div className="p-0 m-0">
-                <b>Precio: $350</b>
-              </div>
-            </Card.Body>
-            <CardFooter>
-              <div className="text-end">
-                <a className="btn btn-success">Go somewhere</a>
-              </div>
-            </CardFooter>
-          </Card>
-        </div>
-        <div className="my-2 col-3">
-          <Card>
-            <Card.Img variant="top" src={fotoCafe} />
-            <Card.Body>
-              <h5 className="verdeOscuro">Capuchino</h5>
-              <Card.Text>
-                Descripcion: Espuma de leche cremosa sobre un espresso fuerte.
-              </Card.Text>
-              <div className="p-0 m-0">
-                <b>Precio: $350</b>
-              </div>
-            </Card.Body>
-            <CardFooter>
-              <div className="text-end">
-                <a className="btn btn-success">Go somewhere</a>
-              </div>
-            </CardFooter>
-          </Card>
-        </div>
-        <div className="my-2 col-3">
-          <Card>
-            <Card.Img variant="top" src={fotoCafe} />
-            <Card.Body>
-              <h5 className="verdeOscuro">Capuchino</h5>
-              <Card.Text>
-                Descripcion: Espuma de leche cremosa sobre un espresso fuerte.
-              </Card.Text>
-              <div className="p-0 m-0">
-                <b>Precio: $350</b>
-              </div>
-            </Card.Body>
-            <CardFooter>
-              <div className="text-end">
-                <a className="btn btn-success">Go somewhere</a>
-              </div>
-            </CardFooter>
-          </Card>
-        </div>
+      <div className="container">
+        <h2>Nuestros Productos</h2>
+        <div className="row">
+          {
+            productos.map((producto,index)=>(
+              <CardProducto key={index} producto={producto} ></CardProducto>
+            ))
+          }
         </div>
       </div>
     </div>
