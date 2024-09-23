@@ -26,10 +26,10 @@ const Menu = ({usuarioLogueado,setUsuarioLogueado}) => {
           <Nav>
             <NavLink end className={'nav-link'} to={'/'}>Inicio</NavLink>
             {usuarioLogueado !== ''?(
-              <>
+              <div className="justify-content-start">
               <NavLink className={'nav-link'} to={'/administrador'}>Administrador</NavLink>
               <Button className={'nav-link'} onClick={logout}> Logout</Button>
-              </>
+              </div>
             )
           :( <NavLink className={'nav-link'} to={'/IniciarSesion'}>Iniciar Sesion</NavLink>)}
            
