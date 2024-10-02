@@ -6,7 +6,7 @@ const CardProducto = ({producto}) => {
     return (
         
         <div className="my-2 col-3">
-            <Card>
+            <Card className="h-100">
               <Card.Img variant="top" src={producto.imagen} />
               <Card.Body>
                 <h5 className="verdeOscuro">{producto.nombreProducto} </h5>
@@ -20,7 +20,7 @@ const CardProducto = ({producto}) => {
               <CardFooter>
                 <div className="text-end">
                   <Link
-                    to={`./detalle/${producto.id}`}
+                    to={`./detalle/${producto._id}`}
                     className="btn btn-success"
                   >
                     Ver detalle

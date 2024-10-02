@@ -18,7 +18,7 @@ const borrarProducto=()=>{
       }).then(async(result) => {
         if (result.isConfirmed) {
 
-const respuesta = await borrarProductoAPI(producto.id)
+const respuesta = await borrarProductoAPI(producto._id)
 if(respuesta.status ===200){
 
     Swal.fire({
@@ -27,7 +27,7 @@ if(respuesta.status ===200){
       icon: "success"
     });
     const productoAPI = await leerProductosAPI()
-    if(productoAPI ===200){
+    if(productoAPI.status ===200){
         const prodActualizados =  await productoAPI.json()
         setListaProductos(prodActualizados)
     }
@@ -54,7 +54,7 @@ else{
               </td>
               <td>{producto.categoria}</td>
               <td>
-                <Link  className="btn btn-warning me-2" to={`/administrador/editar/${producto.id}`}>
+                <Link  className="btn btn-warning me-2" to={`/administrador/editar/${producto._id}`}>
                   <i className="bi bi-pencil-square"></i>
 
                   
