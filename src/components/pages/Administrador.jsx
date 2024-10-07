@@ -53,7 +53,7 @@ const obtenerProductos = async ()=>{
           </thead>
           <tbody>
             {
-              listaProductos.map((producto,posicion)=><ItemProducto setListaProductos={setListaProductos} key={producto.id} producto={producto} fila={posicion+1} ></ItemProducto>)
+              listaProductos.map((producto,posicion)=><ItemProducto setListaProductos={setListaProductos} key={producto._id} producto={producto} fila={posicion+1} ></ItemProducto>)
             }
           </tbody>
         </Table>

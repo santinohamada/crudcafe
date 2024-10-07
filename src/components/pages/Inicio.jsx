@@ -27,8 +27,8 @@ const Inicio = () => {
         <h2>Nuestros Productos</h2>
         <div className="row">
           {
-            productos.map((producto,index)=>(
-              <CardProducto key={index} producto={producto} ></CardProducto>
+            productos.map((producto)=>(
+              <CardProducto key={producto._id} producto={producto} ></CardProducto>
             ))
           }
         </div>
